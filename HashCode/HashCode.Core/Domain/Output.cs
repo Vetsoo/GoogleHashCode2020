@@ -19,7 +19,9 @@ namespace HashCode.Core.Domain
                 foreach(var book in item.Item2)
                 {
                     builder.Append($"{book} ");
-                }                
+
+                }
+                builder.AppendLine();
             }
 
             return builder.ToString();
