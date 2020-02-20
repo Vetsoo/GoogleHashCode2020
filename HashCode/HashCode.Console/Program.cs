@@ -63,11 +63,11 @@
 
 			var algorithmService = new AlgorithmService(fileContents);
 
-			//TODO Execute algorithm
-			var result = new Output();
-
+            //TODO Execute algorithm
+            var result = algorithmService.RunAlgorithm1();
+            
 			//TODO Write correct solution to file
-			fileService.WriteFile(fileName, result);
+			fileService.WriteFile(fileName, result.PrintOutput());
 		}
 	}
 }

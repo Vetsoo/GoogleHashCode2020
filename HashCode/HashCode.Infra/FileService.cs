@@ -90,12 +90,10 @@ namespace HashCode.Infra
 			}
 		}
 
-		public void WriteFile(string inputFile, Output result)
+		public void WriteFile(string inputFile, string result)
 		{
 
 			var path = $"{OutputFolder}{inputFile.Substring(0, inputFile.IndexOf(".", StringComparison.Ordinal))}.out";
-
-			var sb = new StringBuilder();
 
 			// TODO Append results
 			//sb.Append($"{result.Slides.Count}\n");
@@ -112,7 +110,7 @@ namespace HashCode.Infra
 			//	}
 			//}
 
-			File.AppendAllText(path, sb.ToString());
+			File.AppendAllText(path, result);
 		}
 
 		public List<string> GetInputFiles()
