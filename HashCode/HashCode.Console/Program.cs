@@ -64,7 +64,7 @@
 			var algorithmService = new AlgorithmService(fileContents);
 
             //TODO Execute algorithm
-            var result = algorithmService.RunAlgorithm1();
+            var result = algorithmService.RunAlgorithmNumberOne();
             
 			//TODO Write correct solution to file
 			fileService.WriteFile(fileName, result.PrintOutput());
