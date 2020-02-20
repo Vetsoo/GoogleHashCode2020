@@ -15,10 +15,10 @@ namespace HashCode.Core.Domain
             builder.AppendLine($"{LibraryAndBooksOrder.Count}");
             foreach(var item in LibraryAndBooksOrder)
             {
-                builder.AppendLine($"{item.Item1}{item.Item2.Length}");
+                builder.AppendLine($"{item.Item1} {item.Item2.Length}");
                 foreach(var book in item.Item2)
                 {
-                    builder.Append($"{book}");
+                    builder.Append($"{book} ");
                 }                
             }
 
