@@ -65,7 +65,7 @@
 
 			//var result2 = new Output() { LibraryAndBooksOrder = algorithmService.RunAlgorithmNumberOne() };
             //TODO Execute algorithm
-            var result = algorithmService.RunAlgorithmNumberOne();
+            var result = algorithmService.RunAlgorithmNumberTwo();
             
 			//TODO Write correct solution to file
 			fileService.WriteFile(fileName, result.PrintOutput());

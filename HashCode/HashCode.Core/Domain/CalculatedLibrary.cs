@@ -16,6 +16,7 @@ namespace HashCode.Core.Domain
 		public List<int> BookIds { get; set; }
 		public int LibraryId { get; set; }
 		public int TotalTimeNeeded { get; set; }
+        public int TotalPointsOfLibrary { get; set; }
 
 	}
 }

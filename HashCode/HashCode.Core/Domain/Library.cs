@@ -13,5 +13,6 @@ namespace HashCode.Core.Domain
 		public int SignUpProcess { get; set; }
 		public int BooksPerDay { get; set; }
 		public List<int> BookIds { get; set; }
+        public List<Book> Books { get; set; }
 	}
 }

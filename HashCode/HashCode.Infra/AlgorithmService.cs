@@ -44,9 +44,19 @@ namespace HashCode.Infra
 
             foreach (var outputLine in maxThrouhgputItem)
             {
+                var booksInLibraryIds = _input.Libraries.Single(x => x.LibraryId == outputLine.LibraryId).BookIds;
+                var booksInLibrary = new List<Book>();
+
+                {
+                foreach(var bookId in booksInLibraryIds)
+                    booksInLibrary.Add(_input.Books.Single(x => x.BookId == bookId));
+                }
+
+
+                booksInLibrary.OrderByDescending(x => x.Score);
                 output.LibraryAndBooksOrder.Add(new System.Tuple<int, int[]>(
                     outputLine.LibraryId,
-                    _input.Libraries.Single(x => x.LibraryId == outputLine.LibraryId).BookIds.ToArray()
+                    booksInLibrary.Select(x => x.BookId).ToArray()
                     )); ;
             }
 
@@ -76,6 +86,28 @@ namespace HashCode.Infra
             }
 
             foreach (var sort in inputLibrariesWithoutMultiples)
+            {
+                tuple.Add(new Tuple<int, int[]>(sort.LibraryId, sort.BookIds.ToArray()));
+            }
+            return new Output()
+            {
+                LibraryAndBooksOrder = tuple
+            };
+        }
+
+        public Output RunAlgorithmNumberTwo()
+        {
+            List<CalculatedLibrary> inputLibraries = new List<CalculatedLibrary>();
+            foreach (var library in _input.Libraries)
+            {
+                inputLibraries.Add(new CalculatedLibrary() { AmountOfBooks = library.AmountOfBooks, BookIds = library.BookIds, SignUpProcess = library.SignUpProcess, TotalTimeNeeded = library.SignUpProcess + library.AmountOfBooks / library.BooksPerDay, LibraryId = library.LibraryId, TotalPointsOfLibrary = library.Books.Sum(b => b.Score) });
+
+            }
+            var sorted = inputLibraries.OrderBy(x => x.SignUpProcess).OrderByDescending(x => x.TotalPointsOfLibrary / x.TotalTimeNeeded).ToList();
+            List<Tuple<int, int[]>> tuple = new List<Tuple<int, int[]>>();
+
+
+            foreach (var sort in sorted)
             {
                 tuple.Add(new Tuple<int, int[]>(sort.LibraryId, sort.BookIds.ToArray()));
             }

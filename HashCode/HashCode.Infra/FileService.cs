@@ -9,9 +9,8 @@ namespace HashCode.Infra
 {
 	public class FileService
 	{
-        private const string InputFolder = @"C:\Users\bdt\GoogleHashCode2020\HashCode\HashCode.Console\Input\";
-        private const string OutputFolder = @"C:\Users\bdt\GoogleHashCode2020\HashCode\HashCode.Console\Output\";
-
+        private const string InputFolder = @"..\..\..\..\HashCode.Console\Input\";
+        private const string OutputFolder = @"..\..\..\..\HashCode.Console\Output\";
 
         public Input ReadFile(string fileName)
 		{
@@ -74,6 +73,7 @@ namespace HashCode.Infra
 							line = file.ReadLine();
 							fileParameters = line.Split(' ').ToList();
 
+                            library.Books = fileContents.Books;
 							foreach (var param in fileParameters)
 							{
 								library.BookIds.Add(Convert.ToInt32(param));
