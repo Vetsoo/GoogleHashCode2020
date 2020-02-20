@@ -58,7 +58,7 @@
 
 			Console.WriteLine($"File {fileName} has been read out.");
 
-			Console.WriteLine($"Amount of Books: {fileContents.Books}");
+			Console.WriteLine($"Amount of Books: {fileContents.Books.Count}");
 			Console.WriteLine();
 
 			var algorithmService = new AlgorithmService();

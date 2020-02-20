@@ -26,9 +26,17 @@ namespace HashCode.Infra
 				var fileContents = new Input();
 				var line = file.ReadLine();
 				var lineCounter = 1;
+				var libraryId = 0;
 
 				while (line != null)
 				{
+					if (string.IsNullOrEmpty(line))
+					{
+						line = file.ReadLine();
+						lineCounter++;
+						continue;
+					}
+
 					if (lineCounter == 1)
 					{
 						var fileParameters = line.Split(' ').ToList();
@@ -46,22 +54,32 @@ namespace HashCode.Infra
 					}
 					else
 					{
+
 						var library = new Library();
 						var fileParameters = line.Split(' ').ToList();
-						library.AmountOfBooks = Convert.ToInt32(fileParameters[0]);
-						library.SignUpProcess = Convert.ToInt32(fileParameters[1]);
-						library.BooksPerDay = Convert.ToInt32(fileParameters[2]);
-
-						// Read next line
-						line = file.ReadLine();
-						fileParameters = line.Split(' ').ToList();
-
-						foreach (var param in fileParameters)
+						try
 						{
-							library.BookIds.Add(Convert.ToInt32(param));
-						}
+							library.AmountOfBooks = Convert.ToInt32(fileParameters[0]);
+							library.SignUpProcess = Convert.ToInt32(fileParameters[1]);
+							library.BooksPerDay = Convert.ToInt32(fileParameters[2]);
+							library.LibraryId = libraryId;
 
-						fileContents.Libraries.Add(library);
+							// Read next line
+							line = file.ReadLine();
+							fileParameters = line.Split(' ').ToList();
+
+							foreach (var param in fileParameters)
+							{
+								library.BookIds.Add(Convert.ToInt32(param));
+							}
+
+							fileContents.Libraries.Add(library);
+							libraryId++;
+						}
+						catch (Exception ex)
+						{
+							throw ex;
+						}
 					}
 
 					line = file.ReadLine();
@@ -76,7 +94,6 @@ namespace HashCode.Infra
 		{
 
 			var path = $"{OutputFolder}{inputFile.Substring(0, inputFile.IndexOf(".", StringComparison.Ordinal))}.out";
-
 
 			var sb = new StringBuilder();
 
