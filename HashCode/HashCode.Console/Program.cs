@@ -63,6 +63,7 @@
 
 			var algorithmService = new AlgorithmService(fileContents);
 
+			//var result2 = new Output() { LibraryAndBooksOrder = algorithmService.RunAlgorithmNumberOne() };
             //TODO Execute algorithm
             var result = algorithmService.RunAlgorithmNumberOne();
             

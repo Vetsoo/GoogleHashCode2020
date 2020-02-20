@@ -9,8 +9,13 @@ namespace HashCode.Infra
 {
 	public class FileService
 	{
+<<<<<<< Updated upstream
         private const string InputFolder = @"C:\Dev\GoogleHashCode2020\HashCode\HashCode.Console\Input\";
         private const string OutputFolder = @"C:\Dev\GoogleHashCode2020\HashCode\HashCode.Console\Output\";
+=======
+        private const string InputFolder = @"C:\Users\bdt\GoogleHashCode2020\HashCode\HashCode.Console\Input\";
+        private const string OutputFolder = @"C:\Users\bdt\GoogleHashCode2020\HashCode\HashCode.Console\Output\";
+>>>>>>> Stashed changes
 
         public Input ReadFile(string fileName)
 		{
