@@ -37,10 +37,10 @@ namespace HashCode.Infra
             maxThrouhgputItem.OrderByDescending(x => x.Throughput);
 
             var output = new Output();
+            output.LibraryAndBooksOrder = new List<System.Tuple<int, int[]>>();
 
-            foreach(var outputLine in maxThrouhgputItem)
-            {
-                output.LibraryAndBooksOrder = new List<System.Tuple<int, int[]>>();
+            foreach (var outputLine in maxThrouhgputItem)
+            {                
                 output.LibraryAndBooksOrder.Add(new System.Tuple<int, int[]>(
                     outputLine.LibraryId,
                     _input.Libraries.Single(x => x.LibraryId == outputLine.LibraryId).BookIds.ToArray()
