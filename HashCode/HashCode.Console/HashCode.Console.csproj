@@ -17,4 +17,8 @@
     <ProjectReference Include="..\HashCode.Infra\HashCode.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Output\" />
+  </ItemGroup>
+
 </Project>

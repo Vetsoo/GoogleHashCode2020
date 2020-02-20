@@ -348,3 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+HashCode/HashCode.Console/Output/c_incunabula.out
+HashCode/HashCode.Console/Output/d_tough_choices.out
+HashCode/HashCode.Console/Output/e_so_many_books.out
+HashCode/HashCode.Console/Output/f_libraries_of_the_world.out

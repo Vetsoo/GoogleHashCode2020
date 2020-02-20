@@ -17,6 +17,7 @@ namespace HashCode.Core.Domain
 		public int LibraryId { get; set; }
 		public int TotalTimeNeeded { get; set; }
         public int TotalPointsOfLibrary { get; set; }
+        public int Throughput { get; set; }
 
 	}
 }

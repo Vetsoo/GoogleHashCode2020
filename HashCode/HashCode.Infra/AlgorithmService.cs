@@ -86,13 +86,43 @@ namespace HashCode.Infra
 
         public Output RunAlgorithmNumberTwo()
         {
+            List<CalculatedLibrary> inputLibraries = new List<CalculatedLibrary>();            
+            foreach (var library in _input.Libraries)
+            {
+                var lib = new CalculatedLibrary() { AmountOfBooks = library.AmountOfBooks, BookIds = library.BookIds, SignUpProcess = library.SignUpProcess, TotalTimeNeeded = library.SignUpProcess + library.AmountOfBooks / library.BooksPerDay, LibraryId = library.LibraryId };
+                var remainingDays = _input.Days - lib.SignUpProcess;
+                var scannedBooks = remainingDays * library.BooksPerDay;
+                lib.TotalPointsOfLibrary = library.Books.Take(scannedBooks).Sum(b => b.Score);
+            }
+
+            var sorted = inputLibraries.OrderBy(x => x.SignUpProcess).OrderByDescending(x => x.TotalPointsOfLibrary).ToList();
+            List<Tuple<int, int[]>> tuple = new List<Tuple<int, int[]>>();
+
+
+            foreach (var sort in sorted)
+            {
+                tuple.Add(new Tuple<int, int[]>(sort.LibraryId, sort.BookIds.ToArray()));
+            }
+            return new Output()
+            {
+                LibraryAndBooksOrder = tuple
+            };
+        }
+
+        public Output RunAlgorithmNumberThreee()
+        {
             List<CalculatedLibrary> inputLibraries = new List<CalculatedLibrary>();
             foreach (var library in _input.Libraries)
             {
-                inputLibraries.Add(new CalculatedLibrary() { AmountOfBooks = library.AmountOfBooks, BookIds = library.BookIds, SignUpProcess = library.SignUpProcess, TotalTimeNeeded = library.SignUpProcess + library.AmountOfBooks / library.BooksPerDay, LibraryId = library.LibraryId, TotalPointsOfLibrary = library.Books.Sum(b => b.Score) });
+                var lib = new CalculatedLibrary() { AmountOfBooks = library.AmountOfBooks, BookIds = library.BookIds, SignUpProcess = library.SignUpProcess, TotalTimeNeeded = library.SignUpProcess + library.AmountOfBooks / library.BooksPerDay, LibraryId = library.LibraryId };
+                var remainingDays = _input.Days - lib.SignUpProcess;
+                var scannedBooks = remainingDays * library.BooksPerDay;
+                lib.TotalPointsOfLibrary = library.Books.Take(scannedBooks).Sum(b => b.Score);
 
+                inputLibraries.Add(lib);
             }
-            var sorted = inputLibraries.OrderBy(x => x.SignUpProcess).OrderByDescending(x => x.TotalPointsOfLibrary / x.TotalTimeNeeded).ToList();
+
+            var sorted = inputLibraries.OrderBy(x => x.SignUpProcess).OrderByDescending(x => x.TotalPointsOfLibrary).ToList();
             List<Tuple<int, int[]>> tuple = new List<Tuple<int, int[]>>();
 
 
