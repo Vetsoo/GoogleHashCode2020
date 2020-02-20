@@ -8,11 +8,24 @@ namespace HashCode.Core.Domain
 	{
         public List<Tuple<int, int[]>> LibraryAndBooksOrder { get; set; }
 
-        public string PrintOutput()
+        public string PrintOutput(List<Tuple<int, int[]>> libraryAndBooksOrder)
         {
             StringBuilder builder = new StringBuilder();
 
-            return "";
+            builder.AppendLine($"{libraryAndBooksOrder.Count}");
+            foreach(var item in libraryAndBooksOrder)
+            {
+                builder.AppendLine($"{item.Item1}{item.Item2.Length}");
+                foreach(var book in item.Item2)
+                {
+                    builder.Append($"{book}");
+                }                
+            }
+
+            return builder.ToString();
+            
         }
+
+        
     }
 }
