@@ -40,10 +40,20 @@ namespace HashCode.Infra
             output.LibraryAndBooksOrder = new List<System.Tuple<int, int[]>>();
 
             foreach (var outputLine in maxThrouhgputItem)
-            {                
+            {
+                var booksInLibraryIds = _input.Libraries.Single(x => x.LibraryId == outputLine.LibraryId).BookIds;
+                var booksInLibrary = new List<Book>();
+
+                foreach(var bookId in booksInLibraryIds)
+                {
+                    booksInLibrary.Add(_input.Books.Single(x => x.BookId == bookId));
+                }
+
+                booksInLibrary.OrderByDescending(x => x.Score);
+
                 output.LibraryAndBooksOrder.Add(new System.Tuple<int, int[]>(
                     outputLine.LibraryId,
-                    _input.Libraries.Single(x => x.LibraryId == outputLine.LibraryId).BookIds.ToArray()
+                    booksInLibrary.Select(x => x.BookId).ToArray()
                     )); ;
             }
 
