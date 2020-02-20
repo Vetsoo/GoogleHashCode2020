@@ -61,7 +61,7 @@
 			Console.WriteLine($"Amount of Books: {fileContents.Books}");
 			Console.WriteLine();
 
-			var algorithmService = new AlgorithmService();
+			var algorithmService = new AlgorithmService(fileContents);
 
 			//TODO Execute algorithm
 			var result = new Output();

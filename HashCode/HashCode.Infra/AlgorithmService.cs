@@ -27,11 +27,11 @@ namespace HashCode.Infra
                     scannableBooks = library.AmountOfBooks;
                 }
 
-                maxThrouhgputItem.Add(new MaxThroughputLibrary
-                {
-                    LibraryId = library.Id,
-                    Throughput = scannableBooks
-                });
+                //maxThrouhgputItem.Add(new MaxThroughputLibrary
+                //{
+                //    LibraryId = library.Id,
+                //    Throughput = scannableBooks
+                //});
             }
 
             maxThrouhgputItem.OrderByDescending(x => x.Throughput);
