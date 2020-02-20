@@ -98,6 +98,7 @@ namespace HashCode.Infra
         public Output RunAlgorithmNumberTwo()
         {
             List<CalculatedLibrary> inputLibraries = new List<CalculatedLibrary>();
+            List<CalculatedLibrary> inputLibrariesWithoutMultiples = new List<CalculatedLibrary>();
             foreach (var library in _input.Libraries)
             {
                 inputLibraries.Add(new CalculatedLibrary() { AmountOfBooks = library.AmountOfBooks, BookIds = library.BookIds, SignUpProcess = library.SignUpProcess, TotalTimeNeeded = library.SignUpProcess + library.AmountOfBooks / library.BooksPerDay, LibraryId = library.LibraryId, TotalPointsOfLibrary = library.Books.Sum(b => b.Score) });
@@ -107,7 +108,19 @@ namespace HashCode.Infra
             List<Tuple<int, int[]>> tuple = new List<Tuple<int, int[]>>();
 
 
+            List<int> bookIds = new List<int>();
+
             foreach (var sort in sorted)
+            {
+                var amount = sort.BookIds.Except(bookIds).Count();
+                if (amount <= (sort.AmountOfBooks / 2))
+                {
+                    inputLibrariesWithoutMultiples.Add(sort);
+                }
+                bookIds.AddRange(sort.BookIds);
+            }
+
+            foreach (var sort in inputLibrariesWithoutMultiples)
             {
                 tuple.Add(new Tuple<int, int[]>(sort.LibraryId, sort.BookIds.ToArray()));
             }
