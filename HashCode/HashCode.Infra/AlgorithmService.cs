@@ -51,8 +51,8 @@ namespace HashCode.Infra
             }
 
             return output;
-        }       
-        public List<Tuple<int, int[]>> RunAlgorithmNumberOne()
+        }
+        public Output RunAlgorithmNumberOne()
         {
             List<CalculatedLibrary> inputLibraries = new List<CalculatedLibrary>();
             foreach (var library in _input.Libraries)
@@ -68,7 +68,10 @@ namespace HashCode.Infra
             {
                 tuple.Add(new Tuple<int,int[]>(sort.LibraryId, sort.BookIds.ToArray()));
             }
-            return tuple;
+            return new Output()
+            {
+                LibraryAndBooksOrder = tuple
+            };
         }
 
     }
