@@ -9,8 +9,8 @@ namespace HashCode.Infra
 {
 	public class FileService
 	{
-        private const string InputFolder = @"C:\Users\mvermeiren\source\repos\GoogleHashCode2020\Input\";
-        private const string OutputFolder = @"C:\Users\mvermeiren\source\repos\GoogleHashCode2020\Output\";
+        private const string InputFolder = @"C:\Users\mvermeiren\source\repos\GoogleHashCode2020\HashCode\HashCode.Console\Input\";
+        private const string OutputFolder = @"C:\Users\mvermeiren\source\repos\GoogleHashCode2020\HashCode\HashCode.Console\Output\";
 
         public Input ReadFile(string fileName)
 		{
@@ -26,9 +26,17 @@ namespace HashCode.Infra
 				var fileContents = new Input();
 				var line = file.ReadLine();
 				var lineCounter = 1;
+				var libraryId = 0;
 
 				while (line != null)
 				{
+					if (string.IsNullOrEmpty(line))
+					{
+						line = file.ReadLine();
+						lineCounter++;
+						continue;
+					}
+
 					if (lineCounter == 1)
 					{
 						var fileParameters = line.Split(' ').ToList();
@@ -46,22 +54,32 @@ namespace HashCode.Infra
 					}
 					else
 					{
+
 						var library = new Library();
 						var fileParameters = line.Split(' ').ToList();
-						library.AmountOfBooks = Convert.ToInt32(fileParameters[0]);
-						library.SignUpProcess = Convert.ToInt32(fileParameters[1]);
-						library.BooksPerDay = Convert.ToInt32(fileParameters[2]);
-
-						// Read next line
-						line = file.ReadLine();
-						fileParameters = line.Split(' ').ToList();
-
-						foreach (var param in fileParameters)
+						try
 						{
-							library.BookIds.Add(Convert.ToInt32(param));
-						}
+							library.AmountOfBooks = Convert.ToInt32(fileParameters[0]);
+							library.SignUpProcess = Convert.ToInt32(fileParameters[1]);
+							library.BooksPerDay = Convert.ToInt32(fileParameters[2]);
+							library.LibraryId = libraryId;
 
-						fileContents.Libraries.Add(library);
+							// Read next line
+							line = file.ReadLine();
+							fileParameters = line.Split(' ').ToList();
+
+							foreach (var param in fileParameters)
+							{
+								library.BookIds.Add(Convert.ToInt32(param));
+							}
+
+							fileContents.Libraries.Add(library);
+							libraryId++;
+						}
+						catch (Exception ex)
+						{
+							throw ex;
+						}
 					}
 
 					line = file.ReadLine();
@@ -72,13 +90,10 @@ namespace HashCode.Infra
 			}
 		}
 
-		public void WriteFile(string inputFile, Output result)
+		public void WriteFile(string inputFile, string result)
 		{
 
 			var path = $"{OutputFolder}{inputFile.Substring(0, inputFile.IndexOf(".", StringComparison.Ordinal))}.out";
-
-
-			var sb = new StringBuilder();
 
 			// TODO Append results
 			//sb.Append($"{result.Slides.Count}\n");
@@ -95,7 +110,7 @@ namespace HashCode.Infra
 			//	}
 			//}
 
-			File.AppendAllText(path, sb.ToString());
+			File.AppendAllText(path, result);
 		}
 
 		public List<string> GetInputFiles()

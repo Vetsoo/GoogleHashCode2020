@@ -14,7 +14,7 @@ namespace HashCode.Core.Domain
 		public int SignUpProcess { get; set; }
 		public int BooksPerDay { get; set; }
 		public List<int> BookIds { get; set; }
-
+		public int LibraryId { get; set; }
 		public int TotalTimeNeeded { get; set; }
 
 	}

@@ -8,6 +8,7 @@ namespace HashCode.Core.Domain
 		{
 			BookIds = new List<int>();
 		}
+		public int LibraryId { get; set; }
 		public int AmountOfBooks { get; set; }
 		public int SignUpProcess { get; set; }
 		public int BooksPerDay { get; set; }
