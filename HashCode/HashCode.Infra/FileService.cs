@@ -9,8 +9,8 @@ namespace HashCode.Infra
 {
 	public class FileService
 	{
-        private const string InputFolder = @"C:\Users\mvermeiren\source\repos\GoogleHashCode2020\HashCode\HashCode.Console\Input\";
-        private const string OutputFolder = @"C:\Users\mvermeiren\source\repos\GoogleHashCode2020\HashCode\HashCode.Console\Output\";
+        private const string InputFolder = @"C:\Dev\GoogleHashCode2020\HashCode\HashCode.Console\Input\";
+        private const string OutputFolder = @"C:\Dev\GoogleHashCode2020\HashCode\HashCode.Console\Output\";
 
         public Input ReadFile(string fileName)
 		{
@@ -27,6 +27,7 @@ namespace HashCode.Infra
 				var line = file.ReadLine();
 				var lineCounter = 1;
 				var libraryId = 0;
+				var bookId = 0;
 
 				while (line != null)
 				{
@@ -49,7 +50,11 @@ namespace HashCode.Infra
 						var fileParameters = line.Split(' ').ToList();
 						foreach (var param in fileParameters)
 						{
-							fileContents.Books.Add(Convert.ToInt32(param));
+							var book = new Book();
+							book.BookId = bookId;
+							book.Score = Convert.ToInt32(param);
+							fileContents.Books.Add(book);
+							bookId++;
 						}
 					}
 					else
