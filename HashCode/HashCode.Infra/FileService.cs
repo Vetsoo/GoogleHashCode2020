@@ -9,10 +9,10 @@ namespace HashCode.Infra
 {
 	public class FileService
 	{
-		private const string InputFolder = @"D:\Dev\GoogleHashCode2020\Input\";
-		private const string OutputFolder = @"D:\Dev\GoogleHashCode2020\Output\";
+        private const string InputFolder = @"C:\Users\mvermeiren\source\repos\GoogleHashCode2020\Input\";
+        private const string OutputFolder = @"C:\Users\mvermeiren\source\repos\GoogleHashCode2020\Output\";
 
-		public Input ReadFile(string fileName)
+        public Input ReadFile(string fileName)
 		{
 			var path = $"{InputFolder}{fileName}";
 
@@ -25,39 +25,47 @@ namespace HashCode.Infra
 			{
 				var fileContents = new Input();
 				var line = file.ReadLine();
-				var isFirstLine = true;
-				var row = -1;
+				var lineCounter = 1;
 
 				while (line != null)
 				{
-					if (isFirstLine)
+					if (lineCounter == 1)
 					{
-						// TODO Add Firstline code
-						//fileContents.AmountOfPhotos = Convert.ToInt32(line);
+						var fileParameters = line.Split(' ').ToList();
+						fileContents.NumberOfBooks = Convert.ToInt32(fileParameters[0]);
+						fileContents.NumberOfLibraries = Convert.ToInt32(fileParameters[1]);
+						fileContents.Days = Convert.ToInt32(fileParameters[2]);
+					}
+					else if (lineCounter == 2)
+					{
+						var fileParameters = line.Split(' ').ToList();
+						foreach (var param in fileParameters)
+						{
+							fileContents.Books.Add(Convert.ToInt32(param));
+						}
 					}
 					else
 					{
-						// TODO Add other lienss
-						//var photoParameters = line.Split(' ').ToList();
-						//var photo = new Photo()
-						//{
-						//	Id = row,
-						//	IsHorizontal = photoParameters[0] == "H",
-						//	NumberOfTags = Convert.ToInt32(photoParameters[1]),
-						//	Tags = new List<string>()
-						//};
+						var library = new Library();
+						var fileParameters = line.Split(' ').ToList();
+						library.AmountOfBooks = Convert.ToInt32(fileParameters[0]);
+						library.SignUpProcess = Convert.ToInt32(fileParameters[1]);
+						library.BooksPerDay = Convert.ToInt32(fileParameters[2]);
 
-						//for (var i = 2; i < photoParameters.Count; i++)
-						//{
-						//	photo.Tags.Add(photoParameters[i]);
-						//}
+						// Read next line
+						line = file.ReadLine();
+						fileParameters = line.Split(' ').ToList();
 
-						//photos.Add(photo);
+						foreach (var param in fileParameters)
+						{
+							library.BookIds.Add(Convert.ToInt32(param));
+						}
+
+						fileContents.Libraries.Add(library);
 					}
 
 					line = file.ReadLine();
-					isFirstLine = false;
-					row++;
+					lineCounter++;
 				}
 
 				return fileContents;
@@ -69,7 +77,7 @@ namespace HashCode.Infra
 
 			var path = $"{OutputFolder}{inputFile.Substring(0, inputFile.IndexOf(".", StringComparison.Ordinal))}.out";
 
-			
+
 			var sb = new StringBuilder();
 
 			// TODO Append results

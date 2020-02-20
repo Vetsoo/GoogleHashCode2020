@@ -19,11 +19,9 @@
 						Program.RunAllFiles();
 						break;
 					case "S":
-						Console.WriteLine("File path?");
+						Console.WriteLine("Choose which code you would like to run:");
 						var fileName = Console.ReadLine();
-						Console.WriteLine("Choose which code you would like to run: (1 - 5)");
-						var codebasenr = Console.ReadLine();
-						Program.RunSingleFile(fileName, int.Parse(codebasenr));
+						Program.RunSingleFile(fileName);
 						break;
 					default:
 						throw new NotImplementedException();
@@ -48,12 +46,11 @@
 
 			for (int i = 0; i < inputFiles.Count; i++)
 			{
-				var j = i + 1;
-				Program.RunSingleFile(inputFiles[i], j);
+				Program.RunSingleFile(inputFiles[i]);
 			}
 		}
 
-		private static void RunSingleFile(string fileName, int codeBaseNr)
+		private static void RunSingleFile(string fileName)
 		{
 			var fileService = new FileService();
 
@@ -61,10 +58,10 @@
 
 			Console.WriteLine($"File {fileName} has been read out.");
 
-			//Console.WriteLine($"Amount of rows: {fileContents.AmountOfPhotos}");
-			//Console.WriteLine();
+			Console.WriteLine($"Amount of Books: {fileContents.Books}");
+			Console.WriteLine();
 
-			var algorithmService = new AlgorithmService();
+			var algorithmService = new AlgorithmService(fileContents);
 
 			//TODO Execute algorithm
 			var result = new Output();
